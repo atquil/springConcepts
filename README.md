@@ -38,7 +38,7 @@ The Spring framework comprises several modules such as `IOC`, `AOP`, `DAO`, `Con
 
 # Topics 
 
-## Bean
+## @Bean
 
 What ? It's just the `instance of a class` manage by `spring container`
 
@@ -137,4 +137,114 @@ When you will run this, you will be able to see all the beans(**instances**) gen
 )}
 )
 public @interface SpringBootApplication {}
+```
+
+## @Autowire and @Qualifier
+
+## @Autowire
+It is used to automatically inject collaborating beans (other associated dependent beans) into our bean.
+- The @Autowired annotation can be used on properties, `setter methods, and constructors`
+
+
+## How it works?
+
+Suppose while creating a Pojo class, if we have some objects inside and we want to create a `parametrised constructor`, then if we don't have  `instances` of the Pojo object it will throw error
+
+![](src/main/resources/images/beanInjection.png)
+
+1. When I call the call instance it will try to find the instance of it in the Spring Container
+```java
+@Service
+public class UseCollegeBean {
+
+    @Autowired
+    private CollegeBean collegeBean;
+    
+}
+```
+2. Now we need to create the instance of it so that when we are creating the object of CollegeBean, due to `dependency injection` the instance of both String and Student name will be created
+
+```java
+@Component
+@Getter
+@Setter
+public class CollegeBean {
+
+    private String collegeName;
+    private StudentNames studentNames;
+
+    public CollegeBean(String collegeName, StudentNames studentNames) {
+        this.collegeName = collegeName;
+        this.studentNames = studentNames;
+    }
+
+
+}
+
+@Component // As when the CollegeBean is being instanced, then the object of Student is already created.
+class StudentNames{}
+
+@Configuration
+class SetCollegeName{
+    @Bean
+    public String getCollegeName(){
+        return "BEST COLLEGE";
+    }
+}
+```
+## @Qualifier
+The @Autowired annotation can be used with @Qualifier annotation to remove the confusion that arises when we have more than one bean of the same type
+
+1. We have two classes that implement the `Score` interface: `ScienceStudent` and `CommerceStudent`. We also have a `CollegeStudent` class that has a dependency on `Score`.
+
+![](src/main/resources/images/morethanOneBean.png)
+
+2. We use the `@Qualifier` **annotation to specify which implementation** of the `Score` interface should be injected into the CollegeStudent class.
+
+```java
+package com.atquil.springconcepts.autowireAndQualifier.qualifier;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+
+interface Score{
+    void topScore();
+}
+
+@Component("science")
+class ScienceStudent implements Score{
+    @Override
+    public void topScore() {
+        System.out.println("Top score of ScienceStudent:100");
+
+    }
+}
+
+@Component("commerce")
+class CommerceStudent implements Score{
+    @Override
+    public void topScore() {
+        System.out.println("Top score of CommerceStudent:90");
+    }
+}
+@Component
+public class CollegeStudent {
+    private final Score score;
+
+    /*
+    //Now which Bean to choose, for this?
+    public CollegeStudent(Score score) {
+        this.score = score;
+    }
+    */
+
+    @Autowired
+    public CollegeStudent(@Qualifier("science") Score score){
+        this.score = score;
+    }
+}
+
 ```
