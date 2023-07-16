@@ -255,7 +255,20 @@ public class CollegeStudent {
 
 ### Q) How @Autowired is different from @RequiredArgument constructor
 
-The @Autowired annotation and the @RequiredArgsConstructor constructor are both used for dependency injection in Spring Boot
+The `@Autowired` annotation and the @RequiredArgsConstructor constructor are both used for dependency injection in Spring Boot
 
 ### Q) How to know if Constructor has been created?
-@PostConstruct can be used to check if constructor has been initialized, also we can set initial value to it. 
+`@PostConstruct` can be used to check if constructor has been initialized, also we can set initial value to it. 
+
+### Q) What is the lifecycle of the Spring bean?
+
+We can understand it with `@PostConstruct` and `@PreDestroy`
+
+### Q) What do you mean by Stereotype annotation in Spring?
+The stereotype annotations in Spring are used to indicate the role of a class in the application.
+These annotations are used by the Spring container to automatically detect and configure beans
+Examples:
+* `@Component`: This annotation is used to indicate that a class is a Spring component.
+* `@Service`: This annotation is used to indicate that a class is a service layer component.
+* `@Repository`: This annotation is used to indicate that a class is a persistence layer component.
+* `@Controller`: This annotation is used to indicate that a class is a controller component.
