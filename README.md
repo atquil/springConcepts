@@ -272,3 +272,8 @@ Examples:
 * `@Service`: This annotation is used to indicate that a class is a service layer component.
 * `@Repository`: This annotation is used to indicate that a class is a persistence layer component.
 * `@Controller`: This annotation is used to indicate that a class is a controller component.
+
+### Q) Different Scope of bean? 
+
+Singleton(Default), Prototype(n object), web-aware-scope(Request, Session, Application, Websocket)
+
