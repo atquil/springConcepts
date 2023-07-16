@@ -252,3 +252,10 @@ public class CollegeStudent {
 }
 
 ```
+
+### Q) How @Autowired is different from @RequiredArgument constructor
+
+The @Autowired annotation and the @RequiredArgsConstructor constructor are both used for dependency injection in Spring Boot
+
+### Q) How to know if Constructor has been created?
+@PostConstruct can be used to check if constructor has been initialized, also we can set initial value to it. 

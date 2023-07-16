@@ -1,4 +1,4 @@
-package com.atquil.springconcepts.annotations.autowire;
+package com.atquil.springconcepts.annotations.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 public class UseCollegeBean {
 
     @Autowired
-    private CollegeBean collegeBean;
+    private ComponentAnnotation componentAnnotation;
 
 }

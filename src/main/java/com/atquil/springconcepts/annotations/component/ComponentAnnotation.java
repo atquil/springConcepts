@@ -1,4 +1,4 @@
-package com.atquil.springconcepts.annotations.autowire;
+package com.atquil.springconcepts.annotations.component;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 @Setter
-public class CollegeBean {
+public class ComponentAnnotation {
 
     private String collegeName;
     private StudentNames studentNames;
 
-    public CollegeBean(String collegeName, StudentNames studentNames) {
+    public ComponentAnnotation(String collegeName, StudentNames studentNames) {
         this.collegeName = collegeName;
         this.studentNames = studentNames;
     }

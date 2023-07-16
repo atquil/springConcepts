@@ -1,6 +1,7 @@
 package com.atquil.springconcepts.annotations.qualifier;
 
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -30,15 +31,23 @@ class CommerceStudent implements Score{
 public class CollegeStudent {
     private final Score score;
 
-    /*
-    //Now which Bean to choose, for this?
-    public CollegeStudent(Score score) {
-        this.score = score;
-    }
-    */
+
+//    //More than one been of type Score which to use ?
+//    public CollegeStudent(Score score) {
+//        this.score = score;
+//    }
+
 
     @Autowired
     public CollegeStudent(@Qualifier("science") Score score){
         this.score = score;
     }
+
+    @PostConstruct
+    public void init(){
+        score.topScore();
+    }
+
 }
+
+
