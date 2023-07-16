@@ -277,3 +277,43 @@ Examples:
 
 Singleton(Default), Prototype(n object), web-aware-scope(Request, Session, Application, Websocket)
 
+### Q) What is Spring Expression Language? 
+
+Using @Value("#{}") to calculate the field for expression. 
+
+```java
+    @Value("#{2+2}")
+    private int addition;
+
+    //Conditional Operation
+    @Value("#{2>33 ? true:false}")
+    private boolean conditional;
+
+
+    @Value("#{T(Math).sqrt(4)}") //public static double sqrt(double a)
+    private int staticMethod;
+
+
+    private MySpringExpressionStaticClass mySpringExpressionStaticClass;
+
+    @Value("#{mySpringExpressionStaticClass.name}")
+    private String customStaticValue;
+
+    @Value("#{mySpringExpressionStaticClass.someCustomMethod('atquil')}")
+    private String customStaticMethod;
+```
+
+It must be noted that, we will have to use `static` variable and method to be used by Expression
+
+```java
+@Component
+class MySpringExpressionStaticClass{
+
+    //Use static variable
+    public static String name = "SpEL";
+
+    public static String someCustomMethod(String inputString){
+        return "Your input : "+inputString;
+    }
+}
+```
