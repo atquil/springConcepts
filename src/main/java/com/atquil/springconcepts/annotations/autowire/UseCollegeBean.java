@@ -1,4 +1,4 @@
-package com.atquil.springconcepts.autowireAndQualifier.autowire;
+package com.atquil.springconcepts.annotations.autowire;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

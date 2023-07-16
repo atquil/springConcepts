@@ -1,4 +1,4 @@
-package com.atquil.springconcepts.autowireAndQualifier.qualifier;
+package com.atquil.springconcepts.annotations.qualifier;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

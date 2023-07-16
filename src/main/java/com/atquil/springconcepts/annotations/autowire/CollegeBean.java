@@ -1,4 +1,4 @@
-package com.atquil.springconcepts.autowireAndQualifier.autowire;
+package com.atquil.springconcepts.annotations.autowire;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -192,7 +192,10 @@ class SetCollegeName{
     }
 }
 ```
-## @Qualifier
+## Q) What is Ambiguity problem during constructor injection? How to resolve it?
+
+Using @Qualifier
+
 The @Autowired annotation can be used with @Qualifier annotation to remove the confusion that arises when we have more than one bean of the same type
 
 1. We have two classes that implement the `Score` interface: `ScienceStudent` and `CommerceStudent`. We also have a `CollegeStudent` class that has a dependency on `Score`.
@@ -202,7 +205,7 @@ The @Autowired annotation can be used with @Qualifier annotation to remove the c
 2. We use the `@Qualifier` **annotation to specify which implementation** of the `Score` interface should be injected into the CollegeStudent class.
 
 ```java
-package com.atquil.springconcepts.autowireAndQualifier.qualifier;
+package com.atquil.springconcepts.annotations.qualifier;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,29 +213,30 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 
-interface Score{
-    void topScore();
+interface Score {
+  void topScore();
 }
 
 @Component("science")
-class ScienceStudent implements Score{
-    @Override
-    public void topScore() {
-        System.out.println("Top score of ScienceStudent:100");
+class ScienceStudent implements Score {
+  @Override
+  public void topScore() {
+    System.out.println("Top score of ScienceStudent:100");
 
-    }
+  }
 }
 
 @Component("commerce")
-class CommerceStudent implements Score{
-    @Override
-    public void topScore() {
-        System.out.println("Top score of CommerceStudent:90");
-    }
+class CommerceStudent implements Score {
+  @Override
+  public void topScore() {
+    System.out.println("Top score of CommerceStudent:90");
+  }
 }
+
 @Component
 public class CollegeStudent {
-    private final Score score;
+  private final Score score;
 
     /*
     //Now which Bean to choose, for this?
@@ -241,10 +245,10 @@ public class CollegeStudent {
     }
     */
 
-    @Autowired
-    public CollegeStudent(@Qualifier("science") Score score){
-        this.score = score;
-    }
+  @Autowired
+  public CollegeStudent(@Qualifier("science") Score score) {
+    this.score = score;
+  }
 }
 
 ```
