@@ -279,28 +279,33 @@ Singleton(Default), Prototype(n object), web-aware-scope(Request, Session, Appli
 
 ### Q) What is Spring Expression Language? 
 
-Using @Value("#{}") to calculate the field for expression. 
+Using @Value("#{}") to calculate the field for expression.
 
 ```java
-    @Value("#{2+2}")
-    private int addition;
+import org.springframework.stereotype.Component;
 
-    //Conditional Operation
-    @Value("#{2>33 ? true:false}")
-    private boolean conditional;
+@Component
+class SpEL {
+  @Value("#{2+2}")
+  private int addition;
+
+  //Conditional Operation
+  @Value("#{2>33 ? true:false}")
+  private boolean conditional;
 
 
-    @Value("#{T(Math).sqrt(4)}") //public static double sqrt(double a)
-    private int staticMethod;
+  @Value("#{T(Math).sqrt(4)}") //public static double sqrt(double a)
+  private int staticMethod;
 
 
-    private MySpringExpressionStaticClass mySpringExpressionStaticClass;
+  private MySpringExpressionStaticClass mySpringExpressionStaticClass;
 
-    @Value("#{mySpringExpressionStaticClass.name}")
-    private String customStaticValue;
+  @Value("#{mySpringExpressionStaticClass.name}")
+  private String customStaticValue;
 
-    @Value("#{mySpringExpressionStaticClass.someCustomMethod('atquil')}")
-    private String customStaticMethod;
+  @Value("#{mySpringExpressionStaticClass.someCustomMethod('atquil')}")
+  private String customStaticMethod;
+}
 ```
 
 It must be noted that, we will have to use `static` variable and method to be used by Expression
@@ -316,4 +321,32 @@ class MySpringExpressionStaticClass{
         return "Your input : "+inputString;
     }
 }
+```
+
+### Q) AOP Point Cut Explain?
+
+There the location on which we need to intercept
+- `execution` is the key representing PointCut location
+
+```java
+
+import org.springframework.stereotype.Component;
+
+@org.aspectj.lang.annotation.Aspect
+@Component
+class Aspect {
+
+  @Pointcut("execution(* com.atquil.springconcepts.aop.service.AOPService.*(..))")
+  public void usingExecution() {};
+
+  //Within a place
+  @Pointcut("within(com.atquil.springconcepts.aop.service.AOPService")
+  public void usingWithin(){}
+
+  //Specific location
+  @Pointcut("this(com.atquil.springconcepts.aop.service.AOPService)")
+  public void usingThis() {};
+  
+}
+
 ```
